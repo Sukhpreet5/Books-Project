@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Detail</title>
+    <meta charset="utf-8" />
+
+
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="books.css">
+
+    <script type="text/javascript" src="catalog.js"></script>
+    <script type="text/javascript" src="shoppingcart.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+
+    <script>
+
+
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        // add item to cart
+        function addItemToCart(bookid, cartname) {
+
+            var title = books[bookid].title;
+            var price = books[bookid].price;
+            var quantity = 1;
+
+            addToCart(cartname, title, price, quantity)
+            displayCart(cartname);
+        }
+
+
+        $(function(){
+            $("#header").load("header.html");
+            $("#footer").load("footer.html");
+        });
+
+    </script>
+
+</head>
+
+<body>
+
+<div id="header"></div>
+
+
+
+    <h2 class="text-center">Book Detail</h2>
+
+<div class="container">
+
+    <table class="col-sm-12 td-shadow">
+
+        <tr>
+
+            <td class="td33 table-border">
+
+                <script>
+
+                    // display book image
+                    var n = getParameterByName("bookid");
+                    var cartname = getParameterByName("cartname");
+
+
+                    if (cartname == null)
+                        location.href = "books.html";
+
+                    document.write("<img src='bookimages/" + books[n].image + "' alt='" + books[n].title + "' width='100%' >");
+
+                </script>
+
+            </td>
+
+            <td class="td33 table-border" valign="top" >
+
+                <script>
+
+                    // display book detail
+                    var n = getParameterByName("bookid");
+                    var cartname = getParameterByName("cartname");
+
+
+                    document.write("<table class='ml20 mt10 bk-color-ws'>");
+
+                    document.write("<tr><th align='right'>Title: </th><td>" + books[n].title + "</td></tr>");
+                    document.write("<tr><th align='right'>Price: </th><td>$" + books[n].price.toFixed(2) + "</td></tr>");
+                    document.write("<tr><th align='right'>author: </th><td>" + books[n].author + "</td></tr>");
+                    document.write("<tr><th align='right'>published: </th><td>" + books[n].published + "</td></tr>");
+                    document.write("<tr><th align='right'>pages: </th><td>" + books[n].pages + "</td></tr>");
+                    document.write("<tr><th align='right'>category: </th><td>" + books[n].category + "</td></tr>");
+
+                    document.write("</table>");
+
+                    document.write("<button class='ml20 mt10 button' onclick='addItemToCart(" + n + ",cartname);'> Add to Cart </button>");
+
+                </script>
+
+
+
+                <!--display shopping cart-->
+
+                <h2 class="ml20">Your shopping cart:</h2>
+
+                <div class="ml20" id='shoppingcart'></div>
+
+                <script>
+                    displayCart(cartname);
+                </script>
+
+                <p>
+
+                    <script>
+                        document.write("<button class='ml20 mt10 button' onclick=\"location.href='checkout.html?cartname=" + cartname + "'\"> Checkout </button>");
+                    </script>
+
+                    <button class="ml10 button" onclick="location.href = 'books.html'">Continue Shopping</button>
+
+                </p>
+
+            </td>
+
+        </tr>
+
+    </table>
+
+</div>
+
+
+<div id="footer"></div>
+
+
+</body>
+</html>

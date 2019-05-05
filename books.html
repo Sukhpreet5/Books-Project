@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="books.css">
+
+    <script type="text/javascript" src="catalog.js"></script>
+    <script type="text/javascript" src="shoppingcart.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+
+
+    <script>
+        $(function(){
+            $("#header").load("header.html");
+            $("#footer").load("footer.html");
+        });
+    </script>
+
+</head>
+<body>
+
+    <div id="header"></div>
+
+
+    <h2 class="text-center">Select a Book</h2>
+
+    <script>
+
+        var k = 0;
+
+        var cartname = "shoppingItems";
+
+        for (var r = 0; r < books.length / 2; r++) {
+
+
+            document.write("<div class='container-fluid'>");
+            document.write("<div class='row'>");
+            document.write("<div class='col-sm-12'>");
+            document.write("<table class='text-center w100'>");
+
+            document.write("<tr>");
+
+//            for (var c = 0; c < books.length / 2; c++) {
+
+                // title and price
+//                document.write("<td>");
+//                document.write("&nbsp");
+//                document.write("</td>");
+//            }
+
+            document.write("</tr>");
+
+            document.write("<tr>");
+
+            var n = k;
+            for (var c = 0; c < books.length / 2; c++) {
+
+                // title and price
+                document.write("<th class='text-center'>");
+                document.write(books[n].title + " $" + books[n].price.toFixed(2));
+                n++;
+                document.write("</th>");
+            }
+
+            document.write("</tr>");
+
+            n = k;
+
+            document.write("<tr>");
+
+            for (var c = 0; c < books.length / 2; c++) {
+                document.write("<td>");
+                document.write("<a href='details.html?bookid=" + n + "&cartname=" + cartname + "'>");
+                document.write("<img src='bookimages/" + books[n].image + "' alt='" + books[n].title + "' width='100%' >");
+                document.write("</a>");
+                n++;
+                document.write("</td>");
+            }
+
+            document.write("</tr>");
+            k = k + 5;
+        }
+
+        document.write("</table>");
+        document.write("</div>");
+        document.write("</div>");
+
+
+    </script>
+
+    <!--Footer Desktop View-->
+    <div id="footer"></div>
+    <!--Footer Mobile View-->
+    <div class="footer noDesktop"><p>&copy;2018 bookunlimited.com <br/> Contact Us at service@bookunlimited.com</p></div>
+
+</body>
+</html>
